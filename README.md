@@ -1,4 +1,4 @@
-# USer List Application
+# User List Application
 
 A React App that displays a list of users fetched from the mock API
 - Search by name or email
