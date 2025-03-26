@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css';  // Make sure to import the CSS for styling
+import './App.css';  
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -9,7 +9,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortField, setSortField] = useState('name');
   const [sortOrder, setSortOrder] = useState('asc');
-  const [selectedUser, setSelectedUser] = useState(null);  // State for selected user details
+  const [selectedUser, setSelectedUser] = useState(null); 
 
   useEffect(() => {
     axios
@@ -24,13 +24,13 @@ function App() {
       });
   }, []);
 
-  // Filter users based on the search term
+ 
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Sort users based on selected field and order
+
   const sortedUsers = filteredUsers.sort((a, b) => {
     if (sortField === 'name') {
       return sortOrder === 'asc'
@@ -46,7 +46,7 @@ function App() {
 
   const handleClick = (user) => {
     setSelectedUser(prevUser => 
-      prevUser && prevUser.id === user.id ? null : user // Toggle visibility of the user details
+      prevUser && prevUser.id === user.id ? null : user 
     );
   };
 
@@ -62,15 +62,15 @@ function App() {
     <div className="App">
       <h1>User List</h1>
 
-      {/* Search Bar */}
+     
       <input
         type="text"
         placeholder="Search by name or email"
         value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}  // Update search term on input change
+        onChange={e => setSearchTerm(e.target.value)}  
       />
       
-      {/* Sort Options */}
+    
       <div>
         <button onClick={() => setSortField('name')}>
           Sort by Name
@@ -83,20 +83,20 @@ function App() {
         </button>
       </div>
       
-      {/* User List */}
+    
       <ul>
         {sortedUsers.map(user => (
           <li 
             key={user.id} 
             onClick={() => handleClick(user)} 
-            className={selectedUser?.id === user.id ? 'selected' : ''} // Highlight selected user
+            className={selectedUser?.id === user.id ? 'selected' : ''} 
           >
             <strong>{user.name}</strong> - {user.email}
           </li>
         ))}
       </ul>
       
-      {/* User Details Section */}
+     
       {selectedUser && (
         <div className="details">
           <h2>Details for {selectedUser.name}</h2>
